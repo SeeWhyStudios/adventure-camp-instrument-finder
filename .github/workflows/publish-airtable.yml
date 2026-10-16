@@ -1,0 +1,53 @@
+name: Publish approved Airtable snapshot
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Export only approved public fields
+        run: npm run publish:airtable
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+          AIRTABLE_TABLE_ID: ${{ secrets.AIRTABLE_TABLE_ID }}
+          AIRTABLE_FAMILY_TABLE_ID: ${{ secrets.AIRTABLE_FAMILY_TABLE_ID }}
+      - run: npm test
+      - run: npm run build
+      - name: Commit only changed snapshot
+        id: commit
+        shell: bash
+        run: |
+          if git diff --quiet -- data/public-instruments.json; then
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add data/public-instruments.json
+            git commit -m 'Publish approved public camp snapshot'
+            git push origin HEAD:main
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          fi
+  deploy:
+    needs: snapshot
+    if: needs.snapshot.outputs.changed == 'true'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/pages.yml
+# GITHUB_TOKEN pushes do not trigger a second push workflow. Calling the Pages
+# workflow explicitly above ensures a changed snapshot is actually deployed.

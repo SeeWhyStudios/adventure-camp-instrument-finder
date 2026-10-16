@@ -1,0 +1,25 @@
+{
+  "approved": false,
+  "sampleData": true,
+  "viewId": "",
+  "publicNotice": "Open a family to compare skill requirements and availability for both camps.",
+  "publicFooter": "Check with the organisers if you are unsure which camp suits your experience.",
+  "fields": {
+    "publish": "Ready to Publish",
+    "name": "Instrument Name",
+    "family": "Instrument Family",
+    "sortOrder": "Sort Order",
+    "juniorStatus": "Junior Status",
+    "juniorSummary": "Junior Blurb",
+    "juniorShowDetails": "Junior Show Level Details",
+    "juniorDetails": "Junior Level Details",
+    "seniorStatus": "Senior Status",
+    "seniorSummary": "Senior Blurb",
+    "seniorShowDetails": "Senior Show Level Details",
+    "seniorDetails": "Senior Level Details"
+  },
+  "familyFields": {
+    "name": "Name",
+    "sortOrder": "Sort Order"
+  }
+}

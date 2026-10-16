@@ -1,0 +1,446 @@
+{
+  "sampleData": true,
+  "updatedText": "",
+  "publicNotice": "Open a family to compare skill requirements and availability for both camps.",
+  "publicFooter": "Check with the organisers if you are unsure which camp suits your experience.",
+  "profiles": {
+    "juniorStrings": {
+      "summary": "Developing note reader",
+      "details": [
+        "Example: read simple notes and rhythms on your instrument.",
+        "Example: have experience playing short pieces with a steady pulse.",
+        "The organiser must confirm any grade or tuition requirement."
+      ]
+    },
+    "seniorStrings": {
+      "summary": "Confident ensemble player",
+      "details": [
+        "Example: follow a part independently and keep your place in an ensemble.",
+        "Example: prepare unfamiliar rhythms and changing keys with your teacher.",
+        "The organiser must confirm sight-reading and technical expectations."
+      ]
+    },
+    "juniorWind": {
+      "summary": "Comfortable with simple parts",
+      "details": [
+        "Example: read basic rhythms and notes within a comfortable range.",
+        "Example: sustain phrases with developing breath control.",
+        "Required range, experience and any grade remain unconfirmed."
+      ]
+    },
+    "seniorWind": {
+      "summary": "Independent part reader",
+      "details": [
+        "Example: follow an individual orchestral part and count rests.",
+        "Example: prepare more varied rhythms, keys and articulation.",
+        "Instrument-specific range and doubling expectations need confirmation."
+      ]
+    },
+    "juniorPercussion": {
+      "summary": "Steady pulse & simple rhythms",
+      "details": [
+        "Example: maintain a pulse and follow a conductor's cues.",
+        "Example: read simple rhythm patterns.",
+        "The organiser must confirm which instruments and techniques are needed."
+      ]
+    },
+    "seniorPercussion": {
+      "summary": "Confident rhythm reading",
+      "details": [
+        "Example: read changing rhythms and count extended rests.",
+        "Example: move between assigned percussion parts.",
+        "Tuned-percussion, drum-kit and equipment requirements need confirmation."
+      ]
+    },
+    "juniorVoice": {
+      "summary": "Developing singing confidence",
+      "details": [
+        "Example: sing a simple melody with a steady pulse.",
+        "Example: listen and match a group pitch.",
+        "Junior vocal participation, experience and assessment are unconfirmed."
+      ]
+    },
+    "seniorVoice": {
+      "summary": "Comfortable singing in a group",
+      "details": [
+        "Example: hold a melody while listening to other voices.",
+        "Example: prepare an assigned vocal line with guidance.",
+        "Part allocation, music reading and any audition process need confirmation."
+      ]
+    },
+    "auxiliary": {
+      "summary": "Discuss specialist experience",
+      "details": [
+        "Example: discuss your experience on this auxiliary or specialist instrument.",
+        "The organiser must confirm whether this is a main instrument, doubling part or optional second instrument.",
+        "Availability and instrument-specific requirements are unconfirmed."
+      ]
+    }
+  },
+  "groups": [
+    {
+      "name": "Upper strings",
+      "items": [
+        {
+          "name": "Violin",
+          "junior": {
+            "profile": "juniorStrings",
+            "status": "Open"
+          },
+          "senior": {
+            "profile": "seniorStrings",
+            "status": "Full"
+          }
+        },
+        {
+          "name": "Viola",
+          "junior": {
+            "profile": "juniorStrings",
+            "status": "Open"
+          },
+          "senior": {
+            "profile": "seniorStrings",
+            "status": "Open"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lower strings",
+      "items": [
+        {
+          "name": "Cello",
+          "junior": {
+            "profile": "juniorStrings",
+            "status": "Full"
+          },
+          "senior": {
+            "profile": "seniorStrings",
+            "status": "Open"
+          }
+        },
+        {
+          "name": "Double bass",
+          "junior": {
+            "profile": "juniorStrings",
+            "status": "Open"
+          },
+          "senior": {
+            "profile": "seniorStrings",
+            "status": "Open"
+          }
+        },
+        {
+          "name": "Harp",
+          "note": "Specialist string instrument · offering unconfirmed",
+          "junior": {
+            "profile": "auxiliary",
+            "status": "Unverified"
+          },
+          "senior": {
+            "profile": "auxiliary",
+            "status": "Unverified"
+          }
+        },
+        {
+          "name": "Bass guitar",
+          "note": "Additional string instrument · offering unconfirmed",
+          "junior": {
+            "profile": "auxiliary",
+            "status": "Unverified"
+          },
+          "senior": {
+            "profile": "auxiliary",
+            "status": "Unverified"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Woodwind",
+      "items": [
+        {
+          "name": "Flute",
+          "junior": {
+            "profile": "juniorWind",
+            "status": "Open"
+          },
+          "senior": {
+            "profile": "seniorWind",
+            "status": "Open"
+          }
+        },
+        {
+          "name": "Oboe",
+          "junior": {
+            "profile": "juniorWind",
+            "status": "Open"
+          },
+          "senior": {
+            "profile": "seniorWind",
+            "status": "Open"
+          }
+        },
+        {
+          "name": "Clarinet",
+          "junior": {
+            "profile": "juniorWind",
+            "status": "Open"
+          },
+          "senior": {
+            "profile": "seniorWind",
+            "status": "Full"
+          }
+        },
+        {
+          "name": "Bassoon",
+          "junior": {
+            "profile": "juniorWind",
+            "status": "Open"
+          },
+          "senior": {
+            "profile": "seniorWind",
+            "status": "Open"
+          }
+        },
+        {
+          "name": "Saxophone",
+          "note": "Additional wind instrument · offering unconfirmed",
+          "junior": {
+            "profile": "juniorWind",
+            "status": "Unverified"
+          },
+          "senior": {
+            "profile": "seniorWind",
+            "status": "Unverified"
+          }
+        },
+        {
+          "name": "Piccolo",
+          "note": "Auxiliary / doubling · offering unconfirmed",
+          "junior": {
+            "profile": "auxiliary",
+            "status": "Unverified"
+          },
+          "senior": {
+            "profile": "auxiliary",
+            "status": "Unverified"
+          }
+        },
+        {
+          "name": "Cor anglais",
+          "note": "Auxiliary / doubling · offering unconfirmed",
+          "junior": {
+            "profile": "auxiliary",
+            "status": "Unverified"
+          },
+          "senior": {
+            "profile": "auxiliary",
+            "status": "Unverified"
+          }
+        },
+        {
+          "name": "Bass clarinet",
+          "note": "Auxiliary / doubling · offering unconfirmed",
+          "junior": {
+            "profile": "auxiliary",
+            "status": "Unverified"
+          },
+          "senior": {
+            "profile": "auxiliary",
+            "status": "Unverified"
+          }
+        },
+        {
+          "name": "Contrabassoon",
+          "note": "Auxiliary / doubling · offering unconfirmed",
+          "junior": {
+            "profile": "auxiliary",
+            "status": "Unverified"
+          },
+          "senior": {
+            "profile": "auxiliary",
+            "status": "Unverified"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Brass",
+      "items": [
+        {
+          "name": "Trumpet",
+          "junior": {
+            "profile": "juniorWind",
+            "status": "Open"
+          },
+          "senior": {
+            "profile": "seniorWind",
+            "status": "Open"
+          }
+        },
+        {
+          "name": "French horn",
+          "junior": {
+            "profile": "juniorWind",
+            "status": "Open"
+          },
+          "senior": {
+            "profile": "seniorWind",
+            "status": "Open"
+          }
+        },
+        {
+          "name": "Trombone",
+          "junior": {
+            "profile": "juniorWind",
+            "status": "Open"
+          },
+          "senior": {
+            "profile": "seniorWind",
+            "status": "Full"
+          }
+        },
+        {
+          "name": "Tuba",
+          "junior": {
+            "profile": "juniorWind",
+            "status": "Open"
+          },
+          "senior": {
+            "profile": "seniorWind",
+            "status": "Open"
+          }
+        },
+        {
+          "name": "Euphonium / baritone",
+          "note": "Additional brass · offering unconfirmed",
+          "junior": {
+            "profile": "juniorWind",
+            "status": "Unverified"
+          },
+          "senior": {
+            "profile": "seniorWind",
+            "status": "Unverified"
+          }
+        },
+        {
+          "name": "Bass trombone",
+          "note": "Specialist / doubling · offering unconfirmed",
+          "junior": {
+            "profile": "auxiliary",
+            "status": "Unverified"
+          },
+          "senior": {
+            "profile": "auxiliary",
+            "status": "Unverified"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Percussion",
+      "items": [
+        {
+          "name": "Tuned percussion",
+          "junior": {
+            "profile": "juniorPercussion",
+            "status": "Open"
+          },
+          "senior": {
+            "profile": "seniorPercussion",
+            "status": "Open"
+          }
+        },
+        {
+          "name": "Untuned percussion",
+          "junior": {
+            "profile": "juniorPercussion",
+            "status": "Open"
+          },
+          "senior": {
+            "profile": "seniorPercussion",
+            "status": "Open"
+          }
+        },
+        {
+          "name": "Timpani",
+          "note": "Specialist part · offering unconfirmed",
+          "junior": {
+            "profile": "auxiliary",
+            "status": "Unverified"
+          },
+          "senior": {
+            "profile": "seniorPercussion",
+            "status": "Unverified"
+          }
+        },
+        {
+          "name": "Drum kit",
+          "note": "Additional part · offering unconfirmed",
+          "junior": {
+            "profile": "juniorPercussion",
+            "status": "Unverified"
+          },
+          "senior": {
+            "profile": "seniorPercussion",
+            "status": "Unverified"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vocals",
+      "items": [
+        {
+          "name": "Soprano",
+          "note": "Vocal part · allocation to be confirmed",
+          "junior": {
+            "profile": "juniorVoice",
+            "status": "Unverified"
+          },
+          "senior": {
+            "profile": "seniorVoice",
+            "status": "Open"
+          }
+        },
+        {
+          "name": "Alto",
+          "note": "Vocal part · allocation to be confirmed",
+          "junior": {
+            "profile": "juniorVoice",
+            "status": "Unverified"
+          },
+          "senior": {
+            "profile": "seniorVoice",
+            "status": "Open"
+          }
+        },
+        {
+          "name": "Tenor",
+          "note": "Vocal part · allocation to be confirmed",
+          "junior": {
+            "profile": "juniorVoice",
+            "status": "Unverified"
+          },
+          "senior": {
+            "profile": "seniorVoice",
+            "status": "Open"
+          }
+        },
+        {
+          "name": "Bass",
+          "note": "Vocal part · allocation to be confirmed",
+          "junior": {
+            "profile": "juniorVoice",
+            "status": "Unverified"
+          },
+          "senior": {
+            "profile": "seniorVoice",
+            "status": "Open"
+          }
+        }
+      ]
+    }
+  ]
+}

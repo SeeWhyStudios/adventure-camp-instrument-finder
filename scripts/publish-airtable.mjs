@@ -29,7 +29,19 @@ const string=(value,label)=>{if(typeof value!=='string'||!value.trim())throw Err
 const lookupText=(value,label)=>{if(Array.isArray(value)){if(value.length!==1)throw Error(`Expected one public ${label}.`);value=value[0];}const result=string(value,label);if(/^rec[A-Za-z0-9]+$/.test(result))throw Error('Family is a linked-record ID. Configure an approved text lookup/formula instead.');return result;};
 const number=value=>{if(Array.isArray(value))value=value[0];const n=Number(value);return Number.isFinite(n)?n:0;};
 const status=value=>{const found={open:'Open',limited:'Limited',full:'Full',closed:'Closed','second instruments only':'Second Instruments Only','not offered':'Not Offered',unverified:'Unverified'}[String(value||'').toLowerCase()];if(!found)throw Error('A camp has a missing or unsupported public status; snapshot unchanged.');return found;};
-const rows=records.filter(record=>record.fields?.[field.publish]===true&&record.fields?.[field.archived]!==true).map(record=>{
+const approvedRecords=records.filter(record=>record.fields?.[field.publish]===true&&record.fields?.[field.archived]!==true);
+const missing=[];
+for(const record of approvedRecords){
+ const f=record.fields;const name=typeof f[field.name]==='string'?f[field.name].trim():'(unnamed instrument)';
+ for(const camp of ['junior','senior']){
+  if(String(f[field[camp+'Status']]||'').trim().toLowerCase()==='not offered')continue;
+  for(const key of [camp+'Summary',...(f[field[camp+'ShowDetails']]===true?[camp+'Details']:[])]){
+   if(typeof f[field[key]]!=='string'||!f[field[key]].trim())missing.push(`${name}: ${field[key]}`);
+  }
+ }
+}
+if(missing.length)throw Error('Ready to Publish records have blank required public fields:\n- '+missing.join('\n- ')+'\nFill these fields or uncheck Ready to Publish for those instruments. Snapshot unchanged.');
+const rows=approvedRecords.map(record=>{
  const f=record.fields;const item={name:string(f[field.name],'instrument name')};
  for(const camp of ['junior','senior']){
   const campStatus=status(f[field[camp+'Status']]);

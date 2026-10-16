@@ -1,6 +1,15 @@
 name: Publish approved Airtable snapshot
 on:
   workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Publish reviewed Ready to Publish records to the live finder'
+        type: boolean
+        required: true
+        default: false
+concurrency:
+  group: airtable-publication
+  cancel-in-progress: false
 permissions:
   contents: read
 jobs:
@@ -19,12 +28,19 @@ jobs:
         with:
           node-version: '22'
       - name: Export only approved public fields
-        run: npm run publish:airtable
+        shell: bash
+        run: |
+          if [ "$PUBLISH" = 'true' ]; then
+            npm run publish:airtable
+          else
+            npm run publish:airtable -- --dry-run
+          fi
         env:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
-          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
-          AIRTABLE_TABLE_ID: ${{ secrets.AIRTABLE_TABLE_ID }}
-          AIRTABLE_FAMILY_TABLE_ID: ${{ secrets.AIRTABLE_FAMILY_TABLE_ID }}
+          PUBLISH: ${{ inputs.publish }}
+          AIRTABLE_BASE_ID: app6ibiy002FyCaWF
+          AIRTABLE_TABLE_ID: tblIHogDJThe9G42D
+          AIRTABLE_FAMILY_TABLE_ID: tblQ6p38tebi3fxKz
       - run: npm test
       - run: npm run build
       - name: Commit only changed snapshot

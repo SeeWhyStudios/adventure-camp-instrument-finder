@@ -1,8 +1,9 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {mkdtemp,cp,readFile,writeFile,mkdir,rm} from 'node:fs/promises';import {tmpdir} from 'node:os';import path from 'node:path';import {spawnSync} from 'node:child_process';import {fileURLToPath} from 'node:url';
 const source=fileURLToPath(new URL('../',import.meta.url));
 async function fixture(){const root=await mkdtemp(path.join(tmpdir(),'camp-publication-'));await cp(path.join(source,'scripts'),path.join(root,'scripts'),{recursive:true});await mkdir(path.join(root,'config'));await mkdir(path.join(root,'data'));const config=JSON.parse(await readFile(path.join(source,'config/airtable-publication.example.json'),'utf8'));config.approved=true;await writeFile(path.join(root,'config/airtable-publication.json'),JSON.stringify(config));await cp(path.join(source,'data/public-instruments.json'),path.join(root,'data/public-instruments.json'));return {root,config};}
-function run(root,mode='normal'){
+function run(root,mode='normal',dryRun=false){
  const code=`
+ ${dryRun?"process.argv.push('--dry-run');":''}
  const fields=${JSON.stringify(['Ready to Publish','Archived','Instrument Name','Instrument Family','Sort Order','Junior Status','Junior Blurb','Junior Show Level Details','Junior Level Details','Senior Status','Senior Blurb','Senior Show Level Details','Senior Level Details'])};
  globalThis.fetch=async (input)=>{
   const url=new URL(input); const requested=url.searchParams.getAll('fields[]');
@@ -18,3 +19,5 @@ test('only public fields/details are emitted and an unchanged snapshot is not wr
 for(const mode of ['empty','invalid'])test(`${mode} publication leaves the existing snapshot untouched`,async()=>{const {root}=await fixture();try{const before=await readFile(path.join(root,'data/public-instruments.json'),'utf8');assert.notEqual(run(root,mode).status,0);assert.equal(await readFile(path.join(root,'data/public-instruments.json'),'utf8'),before);}finally{await rm(root,{recursive:true,force:true});}});
 
 test('Not Offered exports no Junior requirements and preserves independent Senior content',async()=>{const {root}=await fixture();try{const result=run(root,'not-offered');assert.equal(result.status,0,result.stderr);const data=JSON.parse(await readFile(path.join(root,'data/public-instruments.json'),'utf8'));const item=data.groups[0].items[0];assert.deepEqual(item.junior,{status:'Not Offered',summary:'',details:[]});assert.equal(item.senior.status,'Full');assert.equal(item.senior.summary,'Senior summary');}finally{await rm(root,{recursive:true,force:true});}});
+
+for(const mode of ['normal','empty'])test(`dry run checks ${mode} source without changing the snapshot`,async()=>{const {root}=await fixture();try{const before=await readFile(path.join(root,'data/public-instruments.json'),'utf8');const result=run(root,mode,true);assert.equal(result.status,0,result.stderr);assert.match(result.stdout,/website unchanged/i);assert.equal(await readFile(path.join(root,'data/public-instruments.json'),'utf8'),before);}finally{await rm(root,{recursive:true,force:true});}});

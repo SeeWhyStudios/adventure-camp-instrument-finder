@@ -2,6 +2,7 @@
 import {readFile,writeFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';import path from 'node:path';
 import {validate} from './public-data.mjs';
+const dryRun=process.argv.includes('--dry-run');
 const root=fileURLToPath(new URL('../',import.meta.url));
 const configPath=path.join(root,'config/airtable-publication.json');
 let config;try{config=JSON.parse(await readFile(configPath,'utf8'));}catch{throw Error('Publication is not configured. Confirm the destination and public field mapping before copying the example config.');}
@@ -40,11 +41,15 @@ const rows=records.filter(record=>record.fields?.[field.publish]===true&&record.
  const family=familyMap.get(links[0]);
  return {family:lookupText(family[config.familyFields.name],'family name'),familyOrder:number(family[config.familyFields.sortOrder]),sortOrder:number(f[field.sortOrder]),item};
 });
-if(!rows.length)throw Error('Export has zero approved public instruments; refusing to replace the current snapshot.');
+if(!rows.length){
+ if(dryRun){console.log('Connection checked: both source tables read successfully; zero instruments are Ready to Publish. Website unchanged.');process.exit(0);}
+ throw Error('Export has zero approved public instruments; refusing to replace the current snapshot.');
+}
 rows.sort((a,b)=>a.familyOrder-b.familyOrder||a.family.localeCompare(b.family)||a.sortOrder-b.sortOrder||a.item.name.localeCompare(b.item.name));
 const groups=[];for(const row of rows){let group=groups.find(g=>g.name===row.family);if(!group){group={name:row.family,items:[]};groups.push(group);}group.items.push(row.item);}
 const dest=path.join(root,'data/public-instruments.json');const previous=JSON.parse(await readFile(dest,'utf8'));
 const next=validate({sampleData:config.sampleData,updatedText:previous.updatedText,publicNotice:string(config.publicNotice,'notice'),publicFooter:string(config.publicFooter,'footer'),profiles:{},groups});
+if(dryRun){console.log(`Connection and approved content validated: ${groups.length} families, ${rows.length} entries. Dry run: website unchanged.`);process.exit(0);}
 if(JSON.stringify(next)===JSON.stringify(previous)){console.log('No public content changed. No snapshot write or deployment needed.');process.exit(0);}
 next.updatedText='Updated '+new Intl.DateTimeFormat('en-AU',{dateStyle:'long',timeZone:'Australia/Brisbane'}).format(new Date());
 await writeFile(dest,JSON.stringify(next,null,2)+'\n');console.log(`Public snapshot changed: ${groups.length} families, ${rows.length} entries. No private fields or Airtable record IDs exported.`);

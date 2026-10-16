@@ -20,4 +20,4 @@ await writeFile(path.join(dist,'.nojekyll'),'');
 const demo=await read('src/demo.html');
 await writeFile(path.join(dist,'index.html'),demo);
 await writeFile(path.join(dist,'demo.html'),demo);
-console.log(`Built standalone Wix JS and public demo: ${data.groups.length} families, ${rows} entries. No pending roster edits applied.`);
+console.log(`Built standalone Wix JS and public demo: ${data.groups.length} families, ${rows} entries. Approved roster grouping applied; sample data remains unverified.`);

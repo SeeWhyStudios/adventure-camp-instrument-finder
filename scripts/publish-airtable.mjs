@@ -8,10 +8,10 @@ let config;try{config=JSON.parse(await readFile(configPath,'utf8'));}catch{throw
 if(config.approved!==true)throw Error('Public-field mapping is not approved. No Airtable request made.');
 const {AIRTABLE_TOKEN:token,AIRTABLE_BASE_ID:base,AIRTABLE_TABLE_ID:table,AIRTABLE_FAMILY_TABLE_ID:familyTable}=process.env;
 if(!token||!/^app[A-Za-z0-9]+$/.test(base||'')||!/^tbl[A-Za-z0-9]+$/.test(table||'')||!/^tbl[A-Za-z0-9]+$/.test(familyTable||'')||(config.viewId&&!/^viw[A-Za-z0-9]+$/.test(config.viewId)))throw Error('Missing token or valid approved base/table/view IDs.');
-const required=['publish','name','family','sortOrder','juniorStatus','juniorSummary','juniorShowDetails','juniorDetails','seniorStatus','seniorSummary','seniorShowDetails','seniorDetails'];
+const required=['publish','archived','name','family','sortOrder','juniorStatus','juniorSummary','juniorShowDetails','juniorDetails','seniorStatus','seniorSummary','seniorShowDetails','seniorDetails'];
 if(!config.fields||required.some(k=>typeof config.fields[k]!=='string'||!config.fields[k].trim())||Object.keys(config.fields).some(k=>!required.includes(k)))throw Error('Public field allowlist is incomplete or contains unknown keys.');
 if(typeof config.sampleData!=='boolean')throw Error('Set sampleData explicitly after content review.');
-if(!config.familyFields||Object.keys(config.familyFields).sort().join(',')!=='name,sortOrder'||Object.values(config.familyFields).some(v=>typeof v!=='string'||!v.trim()))throw Error('Approve the public family field allowlist.');
+if(!config.familyFields||Object.keys(config.familyFields).sort().join(',')!=='archived,name,sortOrder'||Object.values(config.familyFields).some(v=>typeof v!=='string'||!v.trim()))throw Error('Approve the public family field allowlist.');
 const allowlist=[...new Set(Object.values(config.fields))];
 async function readTable(tableId,fields,view){const records=[];let offset;do{
  const url=new URL(`https://api.airtable.com/v0/${base}/${tableId}`);if(view)url.searchParams.set('view',view);url.searchParams.set('pageSize','100');if(offset)url.searchParams.set('offset',offset);for(const field of fields)url.searchParams.append('fields[]',field);
@@ -22,13 +22,13 @@ async function readTable(tableId,fields,view){const records=[];let offset;do{
 }while(offset);return records;}
 const records=await readTable(table,allowlist,config.viewId);
 const families=await readTable(familyTable,Object.values(config.familyFields));
-const familyMap=new Map(families.map(record=>[record.id,record.fields]));
+const familyMap=new Map(families.filter(record=>record.fields[config.familyFields.archived]!==true).map(record=>[record.id,record.fields]));
 const field=config.fields;
 const string=(value,label)=>{if(typeof value!=='string'||!value.trim())throw Error(`Missing public ${label}; snapshot unchanged.`);return value.trim();};
 const lookupText=(value,label)=>{if(Array.isArray(value)){if(value.length!==1)throw Error(`Expected one public ${label}.`);value=value[0];}const result=string(value,label);if(/^rec[A-Za-z0-9]+$/.test(result))throw Error('Family is a linked-record ID. Configure an approved text lookup/formula instead.');return result;};
 const number=value=>{if(Array.isArray(value))value=value[0];const n=Number(value);return Number.isFinite(n)?n:0;};
 const status=value=>{const found={open:'Open',full:'Full',unverified:'Unverified'}[String(value||'').toLowerCase()];if(!found)throw Error('A camp has a missing or unsupported public status; snapshot unchanged.');return found;};
-const rows=records.filter(record=>record.fields?.[field.publish]===true).map(record=>{
+const rows=records.filter(record=>record.fields?.[field.publish]===true&&record.fields?.[field.archived]!==true).map(record=>{
  const f=record.fields;const item={name:string(f[field.name],'instrument name')};
  for(const camp of ['junior','senior']){
   const show=f[field[camp+'ShowDetails']]===true;

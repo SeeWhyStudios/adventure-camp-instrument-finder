@@ -5,7 +5,7 @@
 "use strict";
 const data=/*__DATA__*/ null;
 const CSS=/*__CSS__*/ null;
-const MARKUP='<div class="finder" role="region" aria-label="Instrument finder: Junior and Senior Camp">\n<p class="notice" id="data-notice"><strong>Sample only — not current availability or eligibility.</strong> Open an instrument family to compare Junior and Senior Camp. All instruments, levels and details below need organiser confirmation.</p>\n<div id="families"></div>\n<p class="footnote" id="footer">Example skill guidance only. Auxiliary instruments and vocal parts shown here are illustrative; their inclusion in either camp is unconfirmed.</p>\n\n</div>';
+const MARKUP='<div class="finder" role="region" aria-label="Instrument finder: Junior and Senior Camp">\n<p class="notice" id="data-notice"><strong>Sample only — not current availability or eligibility.</strong> Open an instrument family to compare Junior and Senior Camp. All instruments, levels and details below need organiser confirmation.</p>\n<div id="families"></div>\n<p class="footnote" id="footer">Sample skill guidance and availability only. Confirm requirements and places with the camp organisers.</p>\n\n</div>';
 function render(root,width){
 const camps=[{key:"junior",label:"Junior Camp"},{key:"senior",label:"Senior Camp"}];
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}

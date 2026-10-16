@@ -16,10 +16,12 @@
     "seniorStatus": "Senior Status",
     "seniorSummary": "Senior Blurb",
     "seniorShowDetails": "Senior Show Level Details",
-    "seniorDetails": "Senior Level Details"
+    "seniorDetails": "Senior Level Details",
+    "archived": "Archived"
   },
   "familyFields": {
     "name": "Name",
-    "sortOrder": "Sort Order"
+    "sortOrder": "Sort Order",
+    "archived": "Archived"
   }
 }

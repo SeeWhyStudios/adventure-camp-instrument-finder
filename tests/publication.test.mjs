@@ -3,13 +3,13 @@ const source=fileURLToPath(new URL('../',import.meta.url));
 async function fixture(){const root=await mkdtemp(path.join(tmpdir(),'camp-publication-'));await cp(path.join(source,'scripts'),path.join(root,'scripts'),{recursive:true});await mkdir(path.join(root,'config'));await mkdir(path.join(root,'data'));const config=JSON.parse(await readFile(path.join(source,'config/airtable-publication.example.json'),'utf8'));config.approved=true;await writeFile(path.join(root,'config/airtable-publication.json'),JSON.stringify(config));await cp(path.join(source,'data/public-instruments.json'),path.join(root,'data/public-instruments.json'));return {root,config};}
 function run(root,mode='normal'){
  const code=`
- const fields=${JSON.stringify(['Ready to Publish','Instrument Name','Instrument Family','Sort Order','Junior Status','Junior Blurb','Junior Show Level Details','Junior Level Details','Senior Status','Senior Blurb','Senior Show Level Details','Senior Level Details'])};
+ const fields=${JSON.stringify(['Ready to Publish','Archived','Instrument Name','Instrument Family','Sort Order','Junior Status','Junior Blurb','Junior Show Level Details','Junior Level Details','Senior Status','Senior Blurb','Senior Show Level Details','Senior Level Details'])};
  globalThis.fetch=async (input)=>{
   const url=new URL(input); const requested=url.searchParams.getAll('fields[]');
-  if(!requested.length||requested.some(f=>!fields.includes(f)&&!['Name','Sort Order'].includes(f)))throw Error('Invalid field allowlist');
+  if(!requested.length||requested.some(f=>!fields.includes(f)&&!['Name','Sort Order','Archived'].includes(f)))throw Error('Invalid field allowlist');
   const family=url.pathname.endsWith('/tblFamilyExample');
   const f={'Ready to Publish':${mode!=='empty'},'Instrument Name':'Fixture instrument','Instrument Family':['recFamilyExample'],'Sort Order':1,'Junior Status':'Open','Junior Blurb':${mode==='invalid'?"''":"'Junior summary'"},'Junior Show Level Details':false,'Junior Level Details':'DO_NOT_EXPORT_PRIVATE_DRAFT','Senior Status':'Full','Senior Blurb':'Senior summary','Senior Show Level Details':true,'Senior Level Details':'Read independently\\nCount rests','Legacy Blurb':'DO_NOT_EXPORT_LEGACY','Contact email':'DO_NOT_EXPORT_CONTACT'};
-  return {ok:true,json:async()=>({records:family?[{id:'recFamilyExample',fields:{Name:'Fixture family','Sort Order':1}}]:[{id:'recPrivateId',fields:f}]})};
+  return {ok:true,json:async()=>({records:family?[{id:'recFamilyExample',fields:{Name:'Fixture family','Sort Order':1}}]:[{id:'recPrivateId',fields:f},{id:'recArchived',fields:{'Ready to Publish':true,'Archived':true,'Instrument Name':'DO_NOT_EXPORT_ARCHIVED'}}]})};
  };
  await import(${JSON.stringify('file://'+path.join(root,'scripts/publish-airtable.mjs'))});`;
  return spawnSync(process.execPath,['--input-type=module','-e',code],{encoding:'utf8',env:{...process.env,AIRTABLE_TOKEN:'fixture-credential',AIRTABLE_BASE_ID:'appExample',AIRTABLE_TABLE_ID:'tblExample',AIRTABLE_FAMILY_TABLE_ID:'tblFamilyExample'}});

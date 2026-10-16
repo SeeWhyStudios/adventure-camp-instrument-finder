@@ -15,6 +15,14 @@ export async function setupCustomHeaderNavigation($w, options) {
   let settings = options;
   let selected = options.defaultStateId || 'instruments';
   let revision = 0;
+  const sent = new Map();
+  function write(name, value) {
+    if (sent.get(name) === value) return;
+    // Record before writing: a host reconnect can synchronously emit ready.
+    sent.set(name, value);
+    try { nav.setAttribute(name, value); }
+    catch (error) { sent.delete(name); throw error; }
+  }
   function tabs() {
     return Object.entries(settings.tabMenu).map(([id, label]) => ({ id, label }));
   }
@@ -26,7 +34,7 @@ export async function setupCustomHeaderNavigation($w, options) {
   function sync(id = current()) {
     if (!isTab(id)) return;
     selected = id;
-    nav.setAttribute('selected-state', id);
+    write('selected-state', id);
   }
   function configure(next = settings) {
     settings = next;
@@ -34,7 +42,7 @@ export async function setupCustomHeaderNavigation($w, options) {
       throw new Error('Navigation requires tabMenu and the existing onChange section-switch function.');
     }
     selected = isTab(current()) ? current() : tabs()[0].id;
-    nav.setAttribute('config', JSON.stringify({ tabs: tabs(), activeStateId: selected }));
+    write('config', JSON.stringify({ tabs: tabs(), activeStateId: selected }));
     sync(selected);
   }
   nav.on('nl-nav-change', async event => {
@@ -51,7 +59,13 @@ export async function setupCustomHeaderNavigation($w, options) {
       console.error('Header section change failed; selection restored to the actual section.', error);
     }
   });
-  nav.on('nl-nav-ready', () => configure());
+  nav.on('nl-nav-ready', event => {
+    const detail = event.detail || {};
+    // A new host reports retained attributes; resend only missing/stale values.
+    if (Object.hasOwn(detail, 'configValue')) sent.set('config', detail.configValue);
+    if (Object.hasOwn(detail, 'selectedState')) sent.set('selected-state', detail.selectedState);
+    configure();
+  });
   nav.on('nl-nav-error', event => console.error('Navigation configuration:', event.detail?.message));
   const controller = { configure, syncCurrentState: sync };
   instances.set(nav, controller);

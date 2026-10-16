@@ -44,10 +44,14 @@ class AdventureCampNavigation extends HTMLElement {
     this.shadowRoot.querySelector(".next").addEventListener("click",()=>this._cycle(1),{signal});
     this.ownerDocument.addEventListener("keydown",event=>{if(event.key==="Escape"&&this._mobile&&this._open){event.preventDefault();this._setOpen(false,true);}},{signal});
     this.ownerDocument.addEventListener("click",event=>{if(this._mobile&&this._open&&!event.composedPath().includes(this))this._setOpen(false,false);},{capture:true,signal});
-    this._renderTabs();this._measure();
+    if(!this._list.children.length)this._renderTabs();else this._sync();
+    this._measure();
     this._observer=new ResizeObserver(this._schedule);this._observer.observe(this);this._observer.observe(this._shell);
     loadFonts().then(this._schedule);document.fonts?.ready.then(this._schedule);
-    this._emit("nl-nav-ready",{stateId:this._active});
+    if(!this._readySent){
+      this._readySent=true;
+      this._emit("nl-nav-ready",{stateId:this._active,configValue:this.getAttribute("config"),selectedState:this.getAttribute("selected-state")});
+    }
   }
   disconnectedCallback(){this._abort?.abort();this._observer?.disconnect();if(this._frame)cancelAnimationFrame(this._frame);this._frame=0;}
   attributeChangedCallback(name,oldValue,value){

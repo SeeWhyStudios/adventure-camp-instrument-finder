@@ -75,7 +75,7 @@ Readable source: `src/navigation/navigation.html`, `src/navigation/styles.css`, 
 | Wix → element | `setAttribute('config', JSON.stringify({tabs:[{id,label}], activeStateId}))` | Set arbitrary real section keys and labels |
 | Wix → element | `setAttribute('selected-state', id)` | Sync highlight without emitting a change |
 | Element → Wix | `.on('nl-nav-change', event)` | `detail` contains `id`, `section`, `stateId`, `label` |
-| Element → Wix | `.on('nl-nav-ready', ...)` | Safe point to resend config; attributes also persist before load |
+| Element → Wix | `.on('nl-nav-ready', ...)` | Once per instance; reports retained configValue/selectedState so the helper only resends missing or changed attributes |
 | Element → Wix | `.on('nl-nav-height', ...)` | Diagnostic `{height, open, mobile}`; not a request to set a nonexistent Velo height property |
 | Element → Wix | `.on('nl-nav-error', ...)` | Invalid config; last valid tabs retained |
 
@@ -88,3 +88,7 @@ Official Wix references: [custom-element events](https://dev.wix.com/docs/velo/v
 The replacement page no longer imports `backend/wix-instruments-retriever`, `public/instrument-selector-helpers` or `public/instrument-selector-split-v2`. It also no longer imports the old iframe header helper `public/header-tab-menu`. After searching **all Wix project references**, these unused files can be removed if no other page/module needs them. The old backend reads the Import1/Import2 CMS collections; this change does **not** delete those collections or prove they are unused elsewhere.
 
 Review old split-broker HTML elements (`#instrumentTopbarEmbed`, `#instrumentSelectorEmbed`, `#instrumentSelectorInfoEmbed`, `#instrumentPortraitEmbed`, `#instrumentPortraitMobileEmbed`, `#instrumentInfoEmbed`) before removing any that are still on the page. Keep the current hosted instrument finder. Keep `wix-window`, `wix-location`, the section containers, classes/transitions, Home and all sound/overlay elements. No live Wix code, modules, elements or collections were deleted by this delivery.
+
+## Reconnect stability
+
+The helper suppresses identical attribute writes and records each write before calling the host. This prevents a ready → config → host reconnect → ready feedback loop. A new component reports its retained attributes so a replacement that lost configuration still receives it. Reconnecting an existing component preserves tab nodes and does not emit another ready event. This addresses a reproduced reconnect model; periodic Wix Preview reloads were not reproduced in the standalone browser.

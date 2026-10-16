@@ -40,7 +40,7 @@ Official references: [custom Pages workflows](https://docs.github.com/en/pages/g
 ## Preview before release
 
 1. Make proposed edits on a working branch. Keep `main` as the release branch.
-2. Build and inspect the local preview at desktop and phone widths. Open/close families and Level details; confirm the following section moves and text does not overflow. Keep sample warnings until all public content is verified.
+2. Build and inspect the local preview at desktop and phone widths. Open/close families and Level details; confirm the host fits its contents and text does not overflow. Test following-section movement within the actual Wix layout. Keep sample warnings until all public content is verified.
 3. Open a pull request when working through GitHub. The check workflow attaches a downloadable static preview artifact. Serve/open its `index.html` with the adjacent JS for review. This is an artifact, not a separately hosted staging site.
 4. After approval, merge to `main`. Direct pushes to `main` also deploy, so do not push unfinished content there.
 5. Wait for the Pages workflow to succeed; check both the public demo and JavaScript endpoint. GitHub Pages/CDN/browser caches can delay propagation. A freshly opened or hard-refreshed Wix test page is needed to see updates. Publishing here updates the hosted source, not the saved Wix editor code.
@@ -76,3 +76,9 @@ The workflow explicitly calls deployment after a changed snapshot because commit
 Every vocal part has Junior Status **Not Offered** and its Junior Show Level Details checkbox off. Stored Junior text is retained in Airtable, but the snapshot exporter omits it for Not Offered cells. The public widget displays “Not offered in Junior Camp” without Junior requirement/detail controls, while retaining the Senior cell. Not Offered is distinct from Full and Closed. Current Senior vocal source values remain Unverified, and the sample preview also shows Unverified.
 
 The mapper/renderer supports the source choices Open, Limited, Full, Closed, Second Instruments Only, Not Offered and Unverified without conflating them.
+
+## Edit sizes and surrounding copy
+
+The widget contains only its accessible accordion system. Introductory/disclaimer/footer copy belongs in Wix; toggling `sampleData` does not insert surrounding text. Existing sample/unverified data labels and truthful statuses remain unchanged.
+
+Edit the clearly marked **EDIT SIZES HERE** custom properties at the top of [`src/styles.css`](src/styles.css). Desktop and `-mobile` values cover headings, body/level/status/detail text, panel padding, row spacing and family gaps. The 680 px component-width container breakpoint is marked separately. See [the short editing guide](EDITING.md). Build and preview before releasing to main; do not edit generated `dist` files.

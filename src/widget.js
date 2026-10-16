@@ -20,8 +20,9 @@ data.groups.forEach((group,i)=>{
   const row=el("tr"),name=el("th","",item.name);name.scope="row";name.id=`instrument-${i}-${j}`;if(item.note)name.append(el("span","instrument-note",item.note));row.append(name);
   camps.forEach(camp=>{
    const config=item[camp.key]||{},profile=data.profiles[config.profile]||{},cell=el("td"),label=el("span","camp-label",camp.label),line=el("div","level-line");
-   const summaryText=config.summary||profile.summary||"Confirm with organisers",status=["Open","Full","Unverified"].includes(config.status)?config.status:"Unverified";
-   const pill=el("span","pill"+(status==="Open"?"":" full"),status);pill.setAttribute("aria-label",`${data.sampleData?"Sample ":""}${status}`);line.append(el("span","level",summaryText),pill);cell.append(label,line);
+   const summaryText=config.summary||profile.summary||"Confirm with organisers",status=["Open","Limited","Full","Closed","Second Instruments Only","Not Offered","Unverified"].includes(config.status)?config.status:"Unverified";
+   if(status==="Not Offered"){cell.append(label,el("p","not-offered",`Not offered in ${camp.label}`));row.append(cell);return;}
+   const pill=el("span","pill"+(["Full","Closed"].includes(status)?" full":status==="Open"?"":status==="Limited"?" limited":" neutral"),status);pill.setAttribute("aria-label",`${data.sampleData?"Sample ":""}${status}`);line.append(el("span","level",summaryText),pill);cell.append(label,line);
    const points=config.details||profile.details;if(points?.length){const more=el("details","level-details"),trigger=el("summary","","Level details");trigger.setAttribute("aria-label",`Level details for ${item.name}, ${camp.label}${data.sampleData?" — examples only":""}`);more.append(trigger);const list=el("ul");points.forEach(point=>list.append(el("li","",point)));more.append(list);cell.append(more);}row.append(cell);
   });body.append(row);
  });table.append(body);wrap.append(table);family.append(wrap);container.append(family);

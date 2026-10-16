@@ -57,3 +57,8 @@ tbody td+td{border-top:1px solid #c9a77966}
 .pill{min-width:58px}
 .instrument-note{font-size:12px}
 }
+
+.not-offered{font-size:15px;line-height:1.5;font-weight:600;padding:2px 0;color:var(--ink)}
+.pill.neutral{background:#eadfca;color:#6c5140}
+.pill.limited{background:#f0deab;color:#694d1e}
+.pill{max-width:55%;white-space:normal}

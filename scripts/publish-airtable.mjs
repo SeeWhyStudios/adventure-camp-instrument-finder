@@ -27,12 +27,14 @@ const field=config.fields;
 const string=(value,label)=>{if(typeof value!=='string'||!value.trim())throw Error(`Missing public ${label}; snapshot unchanged.`);return value.trim();};
 const lookupText=(value,label)=>{if(Array.isArray(value)){if(value.length!==1)throw Error(`Expected one public ${label}.`);value=value[0];}const result=string(value,label);if(/^rec[A-Za-z0-9]+$/.test(result))throw Error('Family is a linked-record ID. Configure an approved text lookup/formula instead.');return result;};
 const number=value=>{if(Array.isArray(value))value=value[0];const n=Number(value);return Number.isFinite(n)?n:0;};
-const status=value=>{const found={open:'Open',full:'Full',unverified:'Unverified'}[String(value||'').toLowerCase()];if(!found)throw Error('A camp has a missing or unsupported public status; snapshot unchanged.');return found;};
+const status=value=>{const found={open:'Open',limited:'Limited',full:'Full',closed:'Closed','second instruments only':'Second Instruments Only','not offered':'Not Offered',unverified:'Unverified'}[String(value||'').toLowerCase()];if(!found)throw Error('A camp has a missing or unsupported public status; snapshot unchanged.');return found;};
 const rows=records.filter(record=>record.fields?.[field.publish]===true&&record.fields?.[field.archived]!==true).map(record=>{
  const f=record.fields;const item={name:string(f[field.name],'instrument name')};
  for(const camp of ['junior','senior']){
+  const campStatus=status(f[field[camp+'Status']]);
+  if(campStatus==='Not Offered'){item[camp]={status:campStatus,summary:'',details:[]};continue;}
   const show=f[field[camp+'ShowDetails']]===true;
-  item[camp]={status:status(f[field[camp+'Status']]),summary:string(f[field[camp+'Summary']],`${camp} summary`),details:show?string(f[field[camp+'Details']],`${camp} level details`).split(/\r?\n/).map(s=>s.trim()).filter(Boolean):[]};
+  item[camp]={status:campStatus,summary:string(f[field[camp+'Summary']],`${camp} summary`),details:show?string(f[field[camp+'Details']],`${camp} level details`).split(/\r?\n/).map(s=>s.trim()).filter(Boolean):[]};
  }
  const links=f[field.family];if(!Array.isArray(links)||links.length!==1||!familyMap.has(links[0]))throw Error('Public instrument must link to one known family.');
  const family=familyMap.get(links[0]);

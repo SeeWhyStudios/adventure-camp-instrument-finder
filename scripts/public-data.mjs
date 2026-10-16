@@ -20,10 +20,10 @@ export function validate(data){
    if(item.note!==undefined)text(item.note,'note');
    for(const camp of ['junior','senior']){
     const value=item[camp];keys(value,['profile','status','summary','details'],`${item.name} ${camp}`);
-    if(!['Open','Full','Unverified'].includes(value.status))throw Error(`Invalid status: ${item.name} ${camp}`);
+    if(!['Open','Limited','Full','Closed','Second Instruments Only','Not Offered','Unverified'].includes(value.status))throw Error(`Invalid status: ${item.name} ${camp}`);
     if(value.profile!==undefined&&!data.profiles[value.profile])throw Error(`Unknown profile: ${value.profile}`);
     if(value.summary!==undefined)text(value.summary,'summary');
-    if(!value.summary&&!data.profiles[value.profile]?.summary)throw Error(`Missing summary: ${item.name} ${camp}`);
+    if(value.status!=='Not Offered'&&!value.summary&&!data.profiles[value.profile]?.summary)throw Error(`Missing summary: ${item.name} ${camp}`);
     if(value.details!==undefined){if(!Array.isArray(value.details))throw Error('Details must be an array');value.details.forEach(t=>text(t,'detail'));}
    }
   }

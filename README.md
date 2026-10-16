@@ -70,3 +70,9 @@ The manual **Publish approved Airtable snapshot** workflow fails closed while un
 For the first releases, the simplest operation is to ask the maintainer to publish after staff edits, or have an authorised GitHub collaborator run the workflow. GitHub login is needed to run it through Actions. A future Airtable button/automation can invoke an authenticated publication trigger after its exact base/plan and credentials are approved; that may use Airtable automation runs. Do not put a GitHub PAT in a shareable dashboard or unauthenticated URL. No separate admin-login service, write endpoint or paid service is included.
 
 The workflow explicitly calls deployment after a changed snapshot because commits made with `GITHUB_TOKEN` do not trigger a second push workflow automatically. No-change runs skip both commit and deployment. Branch protections may require adapting this maintainer publication workflow to open a data-only PR instead of pushing directly.
+
+## Senior-only vocals
+
+Every vocal part has Junior Status **Not Offered** and its Junior Show Level Details checkbox off. Stored Junior text is retained in Airtable, but the snapshot exporter omits it for Not Offered cells. The public widget displays “Not offered in Junior Camp” without Junior requirement/detail controls, while retaining the Senior cell. Not Offered is distinct from Full and Closed. Current Senior vocal source values remain Unverified, and the sample preview also shows Unverified.
+
+The mapper/renderer supports the source choices Open, Limited, Full, Closed, Second Instruments Only, Not Offered and Unverified without conflating them.

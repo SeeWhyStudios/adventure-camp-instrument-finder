@@ -372,44 +372,44 @@
           "name": "Soprano",
           "junior": {
             "profile": "juniorVoice",
-            "status": "Unverified"
+            "status": "Not Offered"
           },
           "senior": {
             "profile": "seniorVoice",
-            "status": "Open"
+            "status": "Unverified"
           }
         },
         {
           "name": "Alto",
           "junior": {
             "profile": "juniorVoice",
-            "status": "Unverified"
+            "status": "Not Offered"
           },
           "senior": {
             "profile": "seniorVoice",
-            "status": "Open"
+            "status": "Unverified"
           }
         },
         {
           "name": "Tenor",
           "junior": {
             "profile": "juniorVoice",
-            "status": "Unverified"
+            "status": "Not Offered"
           },
           "senior": {
             "profile": "seniorVoice",
-            "status": "Open"
+            "status": "Unverified"
           }
         },
         {
           "name": "Bass",
           "junior": {
             "profile": "juniorVoice",
-            "status": "Unverified"
+            "status": "Not Offered"
           },
           "senior": {
             "profile": "seniorVoice",
-            "status": "Open"
+            "status": "Unverified"
           }
         }
       ]

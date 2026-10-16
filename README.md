@@ -82,3 +82,9 @@ The mapper/renderer supports the source choices Open, Limited, Full, Closed, Sec
 The widget contains only its accessible accordion system. Introductory/disclaimer/footer copy belongs in Wix; toggling `sampleData` does not insert surrounding text. Existing sample/unverified data labels and truthful statuses remain unchanged.
 
 Edit the clearly marked **EDIT SIZES HERE** custom properties at the top of [`src/styles.css`](src/styles.css). Desktop and `-mobile` values cover headings, body/level/status/detail text, panel padding, row spacing and family gaps. The 680 px component-width container breakpoint is marked separately. See [the short editing guide](EDITING.md). Build and preview before releasing to main; do not edit generated `dist` files.
+
+## Separate header navigation custom element
+
+The header iframe replacement is a separate component: **`adventure-camp-navigation`**, built to `adventure-camp-navigation.js`. It keeps only a 70px host while its mobile menu is closed, with no hidden menu hit/focus area. Open height follows content, not a fixed iframe size. The instrument finder is unchanged.
+
+See [navigation setup and Velo bridge](NAVIGATION.md), [readable navigation CSS](src/navigation/styles.css), [helper for Wix Public Code](wix/custom-header-navigation.js), and [the navigation/Strings tap-test demo](https://seewhystudios.github.io/adventure-camp-instrument-finder/navigation.html). Actual Wix parent/header layout still needs a test-site check; no Wix files or settings were edited remotely.

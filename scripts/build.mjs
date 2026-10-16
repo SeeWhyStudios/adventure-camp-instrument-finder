@@ -11,12 +11,21 @@ const template=await read('src/widget.js');
 if(!template.includes('/*__DATA__*/ null')||!template.includes('/*__CSS__*/ null'))throw Error('Build markers missing');
 const js=template.replace('/*__DATA__*/ null',()=>JSON.stringify(data)).replace('/*__CSS__*/ null',()=>JSON.stringify(css));
 new vm.Script(js); // Syntax-check the actual browser bundle without executing DOM APIs.
+const navTemplate=await read('src/navigation/widget.js');
+const navCSS=await read('src/navigation/styles.css');
+const navHTML=await read('src/navigation/navigation.html');
+if(!navTemplate.includes('/*__NAV_CSS__*/ null')||!navTemplate.includes('/*__NAV_HTML__*/ null'))throw Error('Navigation build markers missing');
+const navJS=navTemplate.replace('/*__NAV_CSS__*/ null',()=>JSON.stringify(navCSS)).replace('/*__NAV_HTML__*/ null',()=>JSON.stringify(navHTML));
+new vm.Script(navJS);
 const rows=data.groups.reduce((n,g)=>n+g.items.length,0);
 if(process.argv.includes('--check')){console.log(`Valid public snapshot: ${data.groups.length} families, ${rows} entries; bundle syntax OK.`);process.exit(0);}
 const dist=path.join(root,'dist');await mkdir(dist,{recursive:true});
 await writeFile(path.join(dist,'adventure-instrument-finder.js'),js);
 await writeFile(path.join(dist,'public-instruments.json'),JSON.stringify(data,null,2)+'\n');
 await writeFile(path.join(dist,'.nojekyll'),'');
+await writeFile(path.join(dist,'adventure-camp-navigation.js'),navJS);
+await writeFile(path.join(dist,'navigation.html'),await read('src/navigation/demo.html'));
+await writeFile(path.join(dist,'navigation-demo.js'),await read('src/navigation/demo.js'));
 const demo=await read('src/demo.html');
 await writeFile(path.join(dist,'index.html'),demo);
 await writeFile(path.join(dist,'demo.html'),demo);

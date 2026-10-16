@@ -11,13 +11,13 @@
     "sortOrder": "Sort Order",
     "juniorStatus": "Junior Status",
     "juniorSummary": "Junior Blurb",
-    "juniorShowDetails": "Junior Show Level Details",
-    "juniorDetails": "Junior Level Details",
     "seniorStatus": "Senior Status",
     "seniorSummary": "Senior Blurb",
+    "archived": "Archived",
+    "juniorShowDetails": "Junior Show Level Details",
+    "juniorDetails": "Junior Level Details",
     "seniorShowDetails": "Senior Show Level Details",
-    "seniorDetails": "Senior Level Details",
-    "archived": "Archived"
+    "seniorDetails": "Senior Level Details"
   },
   "familyFields": {
     "name": "Name",

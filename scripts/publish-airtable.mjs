@@ -1,5 +1,6 @@
 // Run on demand on a trusted machine or GitHub Actions; never in the browser.
 import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';import path from 'node:path';
 import {validate} from './public-data.mjs';
 const dryRun=process.argv.includes('--dry-run');
@@ -29,29 +30,46 @@ const string=(value,label)=>{if(typeof value!=='string'||!value.trim())throw Err
 const lookupText=(value,label)=>{if(Array.isArray(value)){if(value.length!==1)throw Error(`Expected one public ${label}.`);value=value[0];}const result=string(value,label);if(/^rec[A-Za-z0-9]+$/.test(result))throw Error('Family is a linked-record ID. Configure an approved text lookup/formula instead.');return result;};
 const number=value=>{if(Array.isArray(value))value=value[0];const n=Number(value);return Number.isFinite(n)?n:0;};
 const status=value=>{const found={open:'Open',limited:'Limited',full:'Full',closed:'Closed','second instruments only':'Second Instruments Only','not offered':'Not Offered',unverified:'Unverified'}[String(value||'').toLowerCase()];if(!found)throw Error('A camp has a missing or unsupported public status; snapshot unchanged.');return found;};
+const dest=path.join(root,'data/public-instruments.json');
+const previous=validate(JSON.parse(await readFile(dest,'utf8')));
+const oldItems=previous.groups.flatMap(group=>group.items.map(item=>({item,family:group.name})));
+const oldById=new Map(oldItems.filter(x=>x.item.id).map(x=>[x.item.id,x]));
+// Name matching is used only to migrate the original snapshot that had no IDs.
+const legacyByName=new Map(oldItems.filter(x=>!x.item.id).map(x=>[x.item.name,x]));
+const nonblank=value=>typeof value==='string'&&value.trim()?value.trim():null;
+const fallback='Requirements have not yet been confirmed. Please contact the organisers.';
 const approvedRecords=records.filter(record=>record.fields?.[field.publish]===true&&record.fields?.[field.archived]!==true);
-const missing=[];
-for(const record of approvedRecords){
- const f=record.fields;const name=typeof f[field.name]==='string'?f[field.name].trim():'(unnamed instrument)';
- for(const camp of ['junior','senior']){
-  if(String(f[field[camp+'Status']]||'').trim().toLowerCase()==='not offered')continue;
-  for(const key of [camp+'Summary',...(f[field[camp+'ShowDetails']]===true?[camp+'Details']:[])]){
-   if(typeof f[field[key]]!=='string'||!f[field[key]].trim())missing.push(`${name}: ${field[key]}`);
-  }
- }
-}
-if(missing.length)throw Error('Ready to Publish records have blank required public fields:\n- '+missing.join('\n- ')+'\nFill these fields or uncheck Ready to Publish for those instruments. Snapshot unchanged.');
 const rows=approvedRecords.map(record=>{
- const f=record.fields;const item={name:string(f[field.name],'instrument name')};
+ const f=record.fields;
+ // Opaque, stable public key: raw Airtable record IDs never leave the exporter.
+ const id='instrument-'+createHash('sha256').update(record.id).digest('hex').slice(0,24);
+ const prior=oldById.get(id)||legacyByName.get(nonblank(f[field.name]));
+ const name=nonblank(f[field.name])||prior?.item.name;
+ if(!name)throw Error('A new public instrument needs a name; snapshot unchanged.');
+ const item={id,name};
+ if(prior?.item.note)item.note=prior.item.note;
  for(const camp of ['junior','senior']){
-  const campStatus=status(f[field[camp+'Status']]);
+  const old=prior?.item[camp];
+  const campStatus=nonblank(f[field[camp+'Status']])?status(f[field[camp+'Status']]):old?.status||'Unverified';
   if(campStatus==='Not Offered'){item[camp]={status:campStatus,summary:'',details:[]};continue;}
-  const show=f[field[camp+'ShowDetails']]===true;
-  item[camp]={status:campStatus,summary:string(f[field[camp+'Summary']],`${camp} summary`),details:show?string(f[field[camp+'Details']],`${camp} level details`).split(/\r?\n/).map(s=>s.trim()).filter(Boolean):[]};
+  const oldSummary=nonblank(old?.summary)||nonblank(previous.profiles[old?.profile]?.summary);
+  let details=[];
+  if(f[field[camp+'ShowDetails']]===true){
+   const supplied=nonblank(f[field[camp+'Details']]);
+   details=supplied?supplied.split(/\r?\n/).map(s=>s.trim()).filter(Boolean):(old?.details||previous.profiles[old?.profile]?.details||[]);
+   if(!supplied&&!details.length)console.warn(`${name}: ${field[camp+'Details']} is blank; no ${camp} details published.`);
+  }
+  item[camp]={status:campStatus,summary:nonblank(f[field[camp+'Summary']])||oldSummary||fallback,details};
  }
- const links=f[field.family];if(!Array.isArray(links)||links.length!==1||!familyMap.has(links[0]))throw Error('Public instrument must link to one known family.');
- const family=familyMap.get(links[0]);
- return {family:lookupText(family[config.familyFields.name],'family name'),familyOrder:number(family[config.familyFields.sortOrder]),sortOrder:number(f[field.sortOrder]),item};
+ const links=f[field.family];let family,sortOrder;
+ if(!links||Array.isArray(links)&&!links.length){
+  if(!prior)throw Error(`New public instrument ${name} needs a family; snapshot unchanged.`);
+  family=prior.family;sortOrder=previous.groups.findIndex(g=>g.name===family);
+ }else{
+  if(!Array.isArray(links)||links.length!==1||!familyMap.has(links[0]))throw Error(`Public instrument ${name} must link to one active family; snapshot unchanged.`);
+  const sourceFamily=familyMap.get(links[0]);family=nonblank(sourceFamily[config.familyFields.name])||prior?.family;if(!family)throw Error(`New public instrument ${name} needs a family name; snapshot unchanged.`);sortOrder=sourceFamily[config.familyFields.sortOrder]===undefined||sourceFamily[config.familyFields.sortOrder]===null||sourceFamily[config.familyFields.sortOrder]===''?Math.max(0,previous.groups.findIndex(g=>g.name===family)):number(sourceFamily[config.familyFields.sortOrder]);
+ }
+ return {family,familyOrder:sortOrder,sortOrder:f[field.sortOrder]===undefined||f[field.sortOrder]===null||f[field.sortOrder]===''?oldItems.findIndex(x=>x.item===prior?.item):number(f[field.sortOrder]),item};
 });
 if(!rows.length){
  if(dryRun){console.log('Connection checked: both source tables read successfully; zero instruments are Ready to Publish. Website unchanged.');process.exit(0);}
@@ -59,7 +77,6 @@ if(!rows.length){
 }
 rows.sort((a,b)=>a.familyOrder-b.familyOrder||a.family.localeCompare(b.family)||a.sortOrder-b.sortOrder||a.item.name.localeCompare(b.item.name));
 const groups=[];for(const row of rows){let group=groups.find(g=>g.name===row.family);if(!group){group={name:row.family,items:[]};groups.push(group);}group.items.push(row.item);}
-const dest=path.join(root,'data/public-instruments.json');const previous=JSON.parse(await readFile(dest,'utf8'));
 const next=validate({sampleData:config.sampleData,updatedText:previous.updatedText,publicNotice:string(config.publicNotice,'notice'),publicFooter:string(config.publicFooter,'footer'),profiles:{},groups});
 if(dryRun){console.log(`Connection and approved content validated: ${groups.length} families, ${rows.length} entries. Dry run: website unchanged.`);process.exit(0);}
 if(JSON.stringify(next)===JSON.stringify(previous)){console.log('No public content changed. No snapshot write or deployment needed.');process.exit(0);}

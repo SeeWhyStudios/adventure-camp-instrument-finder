@@ -11,11 +11,12 @@ export function validate(data){
  keys(data.profiles,Object.keys(data.profiles),'profiles');
  for(const [id,profile] of Object.entries(data.profiles)){keys(profile,['summary','details'],`profile ${id}`);text(profile.summary,id);if(!Array.isArray(profile.details))throw Error('Profile details must be an array');profile.details.forEach(t=>text(t,id));}
  if(!Array.isArray(data.groups)||!data.groups.length)throw Error('No instrument groups');
- const names=new Set();
+ const names=new Set(),ids=new Set();
  for(const group of data.groups){
   keys(group,['name','items'],'group');text(group.name,'family');if(!Array.isArray(group.items)||!group.items.length)throw Error('Empty family');
   for(const item of group.items){
-   keys(item,['name','note','junior','senior'],'instrument');text(item.name,'instrument name');
+   keys(item,['id','name','note','junior','senior'],'instrument');
+   if(item.id!==undefined){if(!/^instrument-[a-f0-9]{24}$/.test(item.id)||ids.has(item.id))throw Error('Invalid or duplicate public instrument ID');ids.add(item.id);}text(item.name,'instrument name');
    if(names.has(item.name))throw Error(`Duplicate instrument ${item.name}`);names.add(item.name);
    if(item.note!==undefined)text(item.note,'note');
    for(const camp of ['junior','senior']){

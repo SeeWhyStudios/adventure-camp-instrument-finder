@@ -1,137 +1,108 @@
 {
-  "sampleData": true,
-  "updatedText": "",
+  "sampleData": false,
+  "updatedText": "Updated 16 October 2026",
   "publicNotice": "Open a family to compare skill requirements and availability for both camps.",
   "publicFooter": "Check with the organisers if you are unsure which camp suits your experience.",
-  "profiles": {
-    "juniorStrings": {
-      "summary": "Developing note reader",
-      "details": [
-        "Example: read simple notes and rhythms on your instrument.",
-        "Example: have experience playing short pieces with a steady pulse.",
-        "The organiser must confirm any grade or tuition requirement."
-      ]
-    },
-    "seniorStrings": {
-      "summary": "Confident ensemble player",
-      "details": [
-        "Example: follow a part independently and keep your place in an ensemble.",
-        "Example: prepare unfamiliar rhythms and changing keys with your teacher.",
-        "The organiser must confirm sight-reading and technical expectations."
-      ]
-    },
-    "juniorWind": {
-      "summary": "Comfortable with simple parts",
-      "details": [
-        "Example: read basic rhythms and notes within a comfortable range.",
-        "Example: sustain phrases with developing breath control.",
-        "Required range, experience and any grade remain unconfirmed."
-      ]
-    },
-    "seniorWind": {
-      "summary": "Independent part reader",
-      "details": [
-        "Example: follow an individual orchestral part and count rests.",
-        "Example: prepare more varied rhythms, keys and articulation.",
-        "Instrument-specific range and doubling expectations need confirmation."
-      ]
-    },
-    "juniorPercussion": {
-      "summary": "Steady pulse & simple rhythms",
-      "details": [
-        "Example: maintain a pulse and follow a conductor's cues.",
-        "Example: read simple rhythm patterns.",
-        "The organiser must confirm which instruments and techniques are needed."
-      ]
-    },
-    "seniorPercussion": {
-      "summary": "Confident rhythm reading",
-      "details": [
-        "Example: read changing rhythms and count extended rests.",
-        "Example: move between assigned percussion parts.",
-        "Tuned-percussion, drum-kit and equipment requirements need confirmation."
-      ]
-    },
-    "juniorVoice": {
-      "summary": "Developing singing confidence",
-      "details": [
-        "Example: sing a simple melody with a steady pulse.",
-        "Example: listen and match a group pitch.",
-        "Junior vocal participation, experience and assessment are unconfirmed."
-      ]
-    },
-    "seniorVoice": {
-      "summary": "Comfortable singing in a group",
-      "details": [
-        "Example: hold a melody while listening to other voices.",
-        "Example: prepare an assigned vocal line with guidance.",
-        "Music reading and any audition process need confirmation."
-      ]
-    },
-    "auxiliary": {
-      "summary": "Confirm requirements",
-      "details": [
-        "The organisers need to confirm the skill requirements for this instrument in each camp."
-      ]
-    }
-  },
+  "profiles": {},
   "groups": [
     {
       "name": "Strings",
       "items": [
         {
+          "id": "instrument-a0989b0281033774691e5c74",
           "name": "Violin 1",
           "junior": {
-            "profile": "juniorStrings",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 4 (strings).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorStrings",
-            "status": "Full"
+            "status": "Open",
+            "summary": "Minimum Grade 5 AMEB or equivalent",
+            "details": [
+              "First parts and solos require AMEB Grade 4–5+.",
+              "Very good sight-reading is strongly recommended for this intensive camp."
+            ]
           }
         },
         {
+          "id": "instrument-b303b56f2c5e8696f304068c",
           "name": "Violin 2",
           "junior": {
-            "profile": "juniorStrings",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 4 (strings).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorStrings",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Minimum Grade 3 AMEB or equivalent",
+            "details": []
           }
         },
         {
+          "id": "instrument-d7f54fb337e6c3518bebdeb0",
           "name": "Viola",
           "junior": {
-            "profile": "juniorStrings",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 4 (strings).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorStrings",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Minimum Grade 3 AMEB or equivalent",
+            "details": []
           }
         },
         {
+          "id": "instrument-73725a2197fcfc42a326dabe",
           "name": "Cello",
           "junior": {
-            "profile": "juniorStrings",
-            "status": "Full"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 4 (strings).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorStrings",
-            "status": "Open"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         },
         {
+          "id": "instrument-f1c1e6785d3246f1d89e7e76",
           "name": "Double Bass",
           "junior": {
-            "profile": "juniorStrings",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 4 (strings).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorStrings",
-            "status": "Open"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         }
       ]
@@ -140,69 +111,125 @@
       "name": "Woodwind",
       "items": [
         {
+          "id": "instrument-d8c1030915c13566f4609759",
           "name": "Flute",
           "junior": {
-            "profile": "juniorWind",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 2 (band).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorWind",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Minimum Grade 3 AMEB for second/third parts.",
+            "details": [
+              "First parts and solos require AMEB Grade 4–5+.",
+              "Very good sight-reading is strongly recommended for this intensive camp."
+            ]
           }
         },
         {
+          "id": "instrument-bb5a217c368ad70e1e85b167",
           "name": "Piccolo",
           "junior": {
-            "profile": "auxiliary",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 2 (band).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "auxiliary",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         },
         {
+          "id": "instrument-b8244d074b45172f4af3683c",
           "name": "Oboe",
           "junior": {
-            "profile": "juniorWind",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 2 (band).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorWind",
-            "status": "Open"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         },
         {
+          "id": "instrument-ff1650f7633dbffce70d1473",
           "name": "Bassoon",
           "junior": {
-            "profile": "juniorWind",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 2 (band).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorWind",
-            "status": "Open"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         },
         {
+          "id": "instrument-c6ad112a8749636756b17385",
           "name": "Clarinet",
           "junior": {
-            "profile": "juniorWind",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 2 (band).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorWind",
-            "status": "Full"
+            "status": "Open",
+            "summary": "Minimum Grade 3 AMEB for second/third parts.",
+            "details": [
+              "First parts and solos require AMEB Grade 4–5+.",
+              "Very good sight-reading is strongly recommended for this intensive camp."
+            ]
           }
         },
         {
+          "id": "instrument-75412d8297ab39ca5c91b286",
           "name": "Bass Clarinet",
           "junior": {
-            "profile": "auxiliary",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 2 (band).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "auxiliary",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         }
       ]
@@ -211,36 +238,63 @@
       "name": "Saxophones",
       "items": [
         {
+          "id": "instrument-15ebddc51263b2690c6770d3",
           "name": "Alto Saxophone",
           "junior": {
-            "profile": "juniorWind",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 2 (band).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorWind",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         },
         {
+          "id": "instrument-7078fe246123ea379a8b3d44",
           "name": "Tenor Saxophone",
           "junior": {
-            "profile": "juniorWind",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 2 (band).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorWind",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         },
         {
+          "id": "instrument-d8277559848d66cb255a9e33",
           "name": "Baritone Saxophone",
           "junior": {
-            "profile": "juniorWind",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 2 (band).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorWind",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         }
       ]
@@ -249,69 +303,124 @@
       "name": "Brass",
       "items": [
         {
+          "id": "instrument-e6d0e93792491678d66ee40e",
           "name": "Trumpet",
           "junior": {
-            "profile": "juniorWind",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 2 (band).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorWind",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Minimum Grade 3 AMEB for second/third parts.",
+            "details": [
+              "First parts and solos require AMEB Grade 4–5+.",
+              "Very good sight-reading is strongly recommended for this intensive camp."
+            ]
           }
         },
         {
+          "id": "instrument-18f9774302fcc958f744101c",
           "name": "French Horn",
           "junior": {
-            "profile": "juniorWind",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 2 (band).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorWind",
-            "status": "Open"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         },
         {
+          "id": "instrument-215373ab570fac892e612b06",
           "name": "Trombone",
           "junior": {
-            "profile": "juniorWind",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 2 (band).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorWind",
-            "status": "Full"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         },
         {
+          "id": "instrument-6dda9e64f5bb1380e572ab1d",
           "name": "Euphonium",
           "junior": {
-            "profile": "juniorWind",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 2 (band).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorWind",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         },
         {
+          "id": "instrument-b9448593f0f399231cdc61f9",
           "name": "Baritone TC/BC",
           "junior": {
-            "profile": "juniorWind",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 2 (band).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorWind",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         },
         {
+          "id": "instrument-8b91e958d1016ebb22baab52",
           "name": "Tuba",
           "junior": {
-            "profile": "juniorWind",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2 or State Curriculum Level 2 (band).",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorWind",
-            "status": "Open"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         }
       ]
@@ -320,47 +429,79 @@
       "name": "Percussion",
       "items": [
         {
+          "id": "instrument-564d1566bcebee5079498c74",
           "name": "Tuned Percussion",
           "junior": {
-            "profile": "juniorPercussion",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2.",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorPercussion",
-            "status": "Open"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         },
         {
+          "id": "instrument-7c580f23b197da06ffda342d",
           "name": "Untuned Percussion",
           "junior": {
-            "profile": "juniorPercussion",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2.",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorPercussion",
-            "status": "Open"
+            "status": "Open",
+            "summary": "Min. Grade 3 AMEB or Level 5 QSC",
+            "details": []
           }
         },
         {
+          "id": "instrument-2194440f4ff07e1a276b4629",
           "name": "Timpani",
           "junior": {
-            "profile": "auxiliary",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2.",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorPercussion",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
+            "details": [
+              "Strong sight-reading is recommended."
+            ]
           }
         },
         {
+          "id": "instrument-4282b80286be4a3ffe4855a9",
           "name": "Drum Kit",
           "junior": {
-            "profile": "juniorPercussion",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2.",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "seniorPercussion",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Minimum AMEB Grade 6+ or equivalent. Chart-reading",
+            "details": []
           }
         }
       ]
@@ -369,47 +510,59 @@
       "name": "Vocals",
       "items": [
         {
+          "id": "instrument-62217705d13931e57435073c",
           "name": "Soprano",
           "junior": {
-            "profile": "juniorVoice",
-            "status": "Not Offered"
+            "status": "Not Offered",
+            "summary": "",
+            "details": []
           },
           "senior": {
-            "profile": "seniorVoice",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Sing in tune. Part-singing experience is strongly recommended; music reading helps, but quick learners do not need to read music.",
+            "details": []
           }
         },
         {
+          "id": "instrument-5324e6fe962e39e55384b06e",
           "name": "Alto",
           "junior": {
-            "profile": "juniorVoice",
-            "status": "Not Offered"
+            "status": "Not Offered",
+            "summary": "",
+            "details": []
           },
           "senior": {
-            "profile": "seniorVoice",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Sing in tune. Part-singing experience is strongly recommended; music reading helps, but quick learners do not need to read music.",
+            "details": []
           }
         },
         {
+          "id": "instrument-5f76a692c11c8146e342f266",
           "name": "Tenor",
           "junior": {
-            "profile": "juniorVoice",
-            "status": "Not Offered"
+            "status": "Not Offered",
+            "summary": "",
+            "details": []
           },
           "senior": {
-            "profile": "seniorVoice",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Sing in tune. Part-singing experience is strongly recommended; music reading helps, but quick learners do not need to read music.",
+            "details": []
           }
         },
         {
+          "id": "instrument-b6c30e9bba22563c0399e91e",
           "name": "Bass",
           "junior": {
-            "profile": "juniorVoice",
-            "status": "Not Offered"
+            "status": "Not Offered",
+            "summary": "",
+            "details": []
           },
           "senior": {
-            "profile": "seniorVoice",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Sing in tune. Part-singing experience is strongly recommended; music reading helps, but quick learners do not need to read music.",
+            "details": []
           }
         }
       ]
@@ -418,44 +571,57 @@
       "name": "Other",
       "items": [
         {
+          "id": "instrument-4b836174ebca1fe4a478ad75",
           "name": "Harp",
           "junior": {
-            "profile": "auxiliary",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Around AMEB Grade 1–2.",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "auxiliary",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Minimum AMEB Grade 6 or equivalent with strong sight-reading ability.",
+            "details": []
           }
         },
         {
+          "id": "instrument-9dd3529ff93d3e51e8750202",
           "name": "Bass Guitar",
           "junior": {
-            "profile": "auxiliary",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Second instrument only. Around AMEB Grade 1–2.",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "auxiliary",
-            "status": "Unverified",
-            "summary": "Second instrument only",
-            "details": [
-              "Can only be registered as a second instrument."
-            ]
+            "status": "Open",
+            "summary": "Can only be registered as a second instrument",
+            "details": []
           }
         },
         {
+          "id": "instrument-6d3ab1ada53111037cfd4af8",
           "name": "Piano",
           "junior": {
-            "profile": "auxiliary",
-            "status": "Unverified"
+            "status": "Open",
+            "summary": "Second instrument only. Around AMEB Grade 1–2.",
+            "details": [
+              "A couple of years of tuition is recommended.",
+              "Reading notes is essential.",
+              "Know simpler keys: concert C, F, G and D major."
+            ]
           },
           "senior": {
-            "profile": "auxiliary",
-            "status": "Unverified",
-            "summary": "Second instrument only",
-            "details": [
-              "Can only be registered as a second instrument."
-            ]
+            "status": "Open",
+            "summary": "May only be registered as a second instrument.\nMinimum AMEB Grade 7 or equivalent with strong sight-reading ability.",
+            "details": []
           }
         }
       ]

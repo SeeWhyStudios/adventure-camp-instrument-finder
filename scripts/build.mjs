@@ -29,4 +29,4 @@ await writeFile(path.join(dist,'navigation-demo.js'),await read('src/navigation/
 const demo=await read('src/demo.html');
 await writeFile(path.join(dist,'index.html'),demo);
 await writeFile(path.join(dist,'demo.html'),demo);
-console.log(`Built standalone Wix JS and public demo: ${data.groups.length} families, ${rows} entries. Approved roster grouping applied; sample data remains unverified.`);
+console.log(`Built standalone Wix JS and public demo: ${data.groups.length} families, ${rows} entries. ${data.sampleData?'Sample data remains unverified.':'Published Airtable snapshot bundled.'}`);

@@ -1,6 +1,6 @@
 {
   "sampleData": false,
-  "updatedText": "Updated 16 October 2026",
+  "updatedText": "Updated 19 October 2026",
   "publicNotice": "Open a family to compare skill requirements and availability for both camps.",
   "publicFooter": "Check with the organisers if you are unsure which camp suits your experience.",
   "profiles": {},
@@ -25,7 +25,7 @@
             "summary": "Minimum Grade 5 AMEB or equivalent",
             "details": [
               "First parts and solos require AMEB Grade 4–5+.",
-              "Very good sight-reading is strongly recommended for this intensive camp."
+              "Very good sight-reading is strongly recommended for this intensive camp. Comfortable playing in keys up to 4# and 4b"
             ]
           }
         },
@@ -43,7 +43,7 @@
           },
           "senior": {
             "status": "Open",
-            "summary": "Minimum Grade 3 AMEB or equivalent",
+            "summary": "Minimum Grade 4 AMEB or equivalent",
             "details": []
           }
         },
@@ -61,7 +61,7 @@
           },
           "senior": {
             "status": "Open",
-            "summary": "Minimum Grade 3 AMEB or equivalent",
+            "summary": "Minimum Grade 4 AMEB or equivalent",
             "details": []
           }
         },
@@ -81,7 +81,7 @@
             "status": "Open",
             "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
             "details": [
-              "Strong sight-reading is recommended."
+              "Strong sight-reading is recommended.Should be familiar with keys up to 4# and 4b"
             ]
           }
         },
@@ -101,7 +101,8 @@
             "status": "Open",
             "summary": "AMEB Grade 4–5+ for first parts or solos; at least Grade 3 for second/third parts.",
             "details": [
-              "Strong sight-reading is recommended."
+              "Strong sight-reading is recommended.",
+              "Should be familiar with keys up to 4# and 4b"
             ]
           }
         }
@@ -472,11 +473,7 @@
           "junior": {
             "status": "Open",
             "summary": "Around AMEB Grade 1–2.",
-            "details": [
-              "A couple of years of tuition is recommended.",
-              "Reading notes is essential.",
-              "Know simpler keys: concert C, F, G and D major."
-            ]
+            "details": []
           },
           "senior": {
             "status": "Open",
@@ -491,11 +488,10 @@
           "name": "Drum Kit",
           "junior": {
             "status": "Open",
-            "summary": "Around AMEB Grade 1–2.",
+            "summary": "Around AMEB Grade 2+",
             "details": [
               "A couple of years of tuition is recommended.",
-              "Reading notes is essential.",
-              "Know simpler keys: concert C, F, G and D major."
+              "Reading notes is essential."
             ]
           },
           "senior": {
@@ -575,15 +571,11 @@
           "name": "Harp",
           "junior": {
             "status": "Open",
-            "summary": "Around AMEB Grade 1–2.",
-            "details": [
-              "A couple of years of tuition is recommended.",
-              "Reading notes is essential.",
-              "Know simpler keys: concert C, F, G and D major."
-            ]
+            "summary": "Please get in touch regarding Junior Camp involvement",
+            "details": []
           },
           "senior": {
-            "status": "Open",
+            "status": "Unverified",
             "summary": "Minimum AMEB Grade 6 or equivalent with strong sight-reading ability.",
             "details": []
           }
@@ -594,11 +586,7 @@
           "junior": {
             "status": "Open",
             "summary": "Second instrument only. Around AMEB Grade 1–2.",
-            "details": [
-              "A couple of years of tuition is recommended.",
-              "Reading notes is essential.",
-              "Know simpler keys: concert C, F, G and D major."
-            ]
+            "details": []
           },
           "senior": {
             "status": "Open",
@@ -612,11 +600,7 @@
           "junior": {
             "status": "Open",
             "summary": "Second instrument only. Around AMEB Grade 1–2.",
-            "details": [
-              "A couple of years of tuition is recommended.",
-              "Reading notes is essential.",
-              "Know simpler keys: concert C, F, G and D major."
-            ]
+            "details": []
           },
           "senior": {
             "status": "Open",
